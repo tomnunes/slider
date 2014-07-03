@@ -1,0 +1,4 @@
+slider
+======
+
+Slider (JS/jQuery)

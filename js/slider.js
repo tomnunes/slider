@@ -1,34 +1,36 @@
 jQuery(document).ready(function(){
-  function showArrow(productsGrid, gridGeral) {
-      var marginLeft = parseInt(gridGeral.find(".grid-trail").css("margin-left"));
-      var widthLi = parseInt(gridGeral.find(".grid-trail .grid-item").eq(0).css("width"));
-      var quantityEls = productsGrid.size();
-      var totalWidth = quantityEls * widthLi;
-      var visibleAreaAndLeft = parseInt(gridGeral.find(".canvas").css("width")) + (marginLeft * -1);
-      if ( marginLeft < 0 ){
-          gridGeral.find(".arrow-left").removeClass("arrow-off");
-          gridGeral.find(".arrow-left").addClass("arrow-on");
-      }
-      else {
-          gridGeral.find(".arrow-left").removeClass("arrow-on");
-          gridGeral.find(".arrow-left").addClass("arrow-off");
-      }
+  function showArrow() {
+    jQuery(".grid-slide").each(function(){
+          var marginLeft = parseInt(jQuery(this).find(".grid-trail").css("margin-left"));
+          var widthLi = parseInt(jQuery(this).find(".grid-trail .grid-item").eq(0).css("width"));
+          var quantityEls = jQuery(this).find(".grid-item").size();
+          var totalWidth = quantityEls * widthLi;
+          var visibleAreaAndLeft = parseInt(jQuery(this).find(".canvas").css("width")) + (marginLeft * -1);
+          if ( marginLeft < 0 ){
+              jQuery(this).find(".arrow-left").removeClass("arrow-off");
+              jQuery(this).find(".arrow-left").addClass("arrow-on");
+          }
+          else {
+              jQuery(this).find(".arrow-left").removeClass("arrow-on");
+              jQuery(this).find(".arrow-left").addClass("arrow-off");
+          }
 
-      if (totalWidth > visibleAreaAndLeft) {
-          gridGeral.find(".arrow-right").removeClass("arrow-off");
-          gridGeral.find(".arrow-right").addClass("arrow-on");
-      }
-      else {
-          gridGeral.find(".arrow-right").removeClass("arrow-on");
-          gridGeral.find(".arrow-right").addClass("arrow-off");
-      }
-      console.log("marginLeft = " + marginLeft);
-      console.log("widthLi = " + widthLi);
-      console.log("quantityEls = " + quantityEls);
-      console.log("totalWidth = " + totalWidth);
-      console.log("visibleAreaAndLeft = " + visibleAreaAndLeft);
+          if (totalWidth > visibleAreaAndLeft) {
+              jQuery(this).find(".arrow-right").removeClass("arrow-off");
+              jQuery(this).find(".arrow-right").addClass("arrow-on");
+          }
+          else {
+              jQuery(this).find(".arrow-right").removeClass("arrow-on");
+              jQuery(this).find(".arrow-right").addClass("arrow-off");
+          }
+          console.log("marginLeft = " + marginLeft);
+          console.log("widthLi = " + widthLi);
+          console.log("quantityEls = " + quantityEls);
+          console.log("totalWidth = " + totalWidth);
+          console.log("visibleAreaAndLeft = " + visibleAreaAndLeft);
+    })
   }
-  showArrow(jQuery(".grid-trail .grid-item"),jQuery(".grid-slide"));
+  showArrow();
 
   jQuery(".arrow-right").click(function(){
       if (jQuery(this).hasClass("arrow-on")) {
@@ -41,7 +43,7 @@ jQuery(document).ready(function(){
           var widthLi = parseInt(jQuery(Slide).find(".grid-item").eq(0).css("width")) * Lis;
           var newMarginLeft = parseInt(jQuery(Slide).find(".grid-trail").css("margin-left")) - widthLi;
 
-          jQuery(Slide).find(".grid-trail").animate({marginLeft: newMarginLeft + "px"}, 500, function() { showArrow(jQuery(this).parent().parent(".grid-slide").find(".grid-item"),jQuery(this).parent().parent(".grid-slide")); });
+          jQuery(Slide).find(".grid-trail").animate({marginLeft: newMarginLeft + "px"}, 500, function() { showArrow(); });
       };
 
   })
@@ -56,7 +58,7 @@ jQuery(document).ready(function(){
           var widthLi = parseInt(jQuery(Slide).find(".grid-item").eq(0).css("width")) * Lis;
           var newMarginLeft = parseInt(jQuery(Slide).find(".grid-trail").css("margin-left")) + widthLi;
 
-          jQuery(Slide).find(".grid-trail").animate({marginLeft: newMarginLeft + "px"}, 500, function() { showArrow(jQuery(this).parent().parent(".grid-slide").find(".grid-item"),jQuery(this).parent().parent(".grid-slide")); });
+          jQuery(Slide).find(".grid-trail").animate({marginLeft: newMarginLeft + "px"}, 500, function() { showArrow(); });
       };
   })
 })
